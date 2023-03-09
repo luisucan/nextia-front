@@ -1,1 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
+html{
+    height: 100%;
+}
+body{
+    height: 100%;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.div-imagen-fondo {
+    background-image: url('./assets/img/escritorio.jpg');
+    background-repeat: no-repeat, repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+
+.red{
+    color: rgba(201, 9, 9, 0.763);
+}

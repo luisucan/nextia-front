@@ -1,0 +1,9 @@
+<div class="d-grid gap-2" *ngIf="!isLoading">
+    <button [className]="true ? className : ''" type="button" (click)="action()">{{title}}</button>
+</div>
+<div class="d-grid gap-2" *ngIf="isLoading">
+    <button [ngClass]="className" type="button" disabled="">
+        <img src="./../../../../assets/img/loading.svg" style="width: 20px;" alt="">
+        {{title}}
+    </button>
+</div>

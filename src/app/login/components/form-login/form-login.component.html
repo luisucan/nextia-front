@@ -1,0 +1,25 @@
+<form class="formulario" [formGroup]="form">
+    <h3>Inicio de sesión</h3>
+    <div class="form-group">
+        <label for="exampleInputEmail1" class="form-label mt-4">Usuario</label>
+        <input type="text" class="form-control form-control-sm" aria-describedby="emailHelp"
+            placeholder="Ingrese su usuario" formControlName="username">
+        <small *ngIf="getError('username')" class="form-text red">El usuario es requerido.</small>
+    </div>
+    <div class="form-group mb-3">
+        <label for="exampleInputPassword1" class="form-label mt-4">Contraseña</label>
+        <input type="password" class="form-control form-control-sm" placeholder="Ingrese su contraseña" formControlName="password">
+        <small *ngIf="getError('password')" class="form-text red">La contraseña es requerida.</small>
+    </div>
+    <div class="d-grid gap-2">
+        <custom-buttom
+            (onEvent)="login()"
+            [isLoading]="isLoading"
+            [title]="'Iniciar Sessión'"
+            [className]="'btn btn-lg btn-sm btn-primary'"></custom-buttom>
+        <custom-buttom
+            (onEvent)="goToRegister()"
+            [title]="'Registrarse'"
+            [className]="'btn btn-lg btn-sm btn-secondary'"></custom-buttom>
+    </div>
+</form>
