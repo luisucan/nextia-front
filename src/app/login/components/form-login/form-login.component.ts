@@ -1,6 +1,10 @@
+import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { first, map } from 'rxjs';
+import { SessionService } from 'src/app/shared/services/session.service';
+import Swal from 'sweetalert2';
 import { LoginService } from '../../services/login.service';
 
 @Component({
@@ -16,7 +20,8 @@ export class FormLoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private sessionService: SessionService
   ) {
     this.form = this.formBuilder.group({
       username: ['luisucan',[Validators.required]],
@@ -39,10 +44,18 @@ export class FormLoginComponent implements OnInit {
     .subscribe({
       next: (data:any)=>{
         this.isLoading = false;
+        console.log(data.Bearer)
+        this.sessionService.setToken( data.Bearer);
+        this.router.navigateByUrl('');
       },
       error: (err)=>{
+        console.log(err)
         this.isLoading = false;
-        console.log(err);
+        Swal.fire(
+          'Upps',
+          'El usuario o contraseña no son correctos',
+          'error'
+        )
       }
     })
   }

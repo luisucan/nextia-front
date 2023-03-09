@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
+import { RegisterService } from '../../services/register.service';
 
 @Component({
   selector: 'form-register',
@@ -15,10 +17,13 @@ export class FormRegisterComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
+    private registerService: RegisterService
   ) {
     this.form = this.formBuilder.group({
-      username: ['luisucan',[Validators.required]],
-      password: ['1234',[Validators.required]],
+      username: ['',[Validators.required]],
+      password: ['',[Validators.required]],
+      name: ['',[Validators.required]],
+      lastName: ['',[]],
     })
   }
 
@@ -31,6 +36,28 @@ export class FormRegisterComponent implements OnInit {
 
   register(){
 
+    if(!this.form.valid){
+      this.form.markAllAsTouched();
+      return;
+    }
+
+    this.isLoading = true;
+
+    this.registerService.register(this.form.value)
+    .subscribe({
+      next: ()=>{
+        this.isLoading = false;
+        this.router.navigateByUrl('home');
+      },
+      error: (err)=>{
+        this.isLoading = false;
+        Swal.fire(
+          'Upps',
+          'El usuario o contraseña no son correctos',
+          'error'
+        )
+      }
+    })
   }
 
   getError(controlName: string): string {
