@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
@@ -28,5 +28,25 @@ export class TodoService {
 
   eliminar(taskId:any){
     return this.http.delete(`${environment.url}/tasks/${taskId}`, {});
+  }
+
+  findArchivos(taskId:any){
+    return this.http.get(`${environment.url}/files/task/${taskId}`)
+  }
+
+  subirarchivos(taskId:any,formData: FormData){
+    return this.http.post(`${environment.url}/files/${taskId}`, formData);
+  }
+
+  eliminarArchivo(fileTaskId:any){
+    return this.http.delete(`${environment.url}/files/${fileTaskId}`, {});
+  }
+
+  descargar(fileTaskId:any){
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post(`${environment.url}/files/download/${fileTaskId}`, {}, {
+      headers,
+      responseType: 'blob' as 'json'
+    });
   }
 }

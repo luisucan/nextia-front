@@ -8,6 +8,7 @@ import { SharedModule } from '../shared/shared.module';
 import { ListTodoComponent } from './components/list-todo/list-todo.component';
 import { FormTodoComponent } from './components/form-todo/form-todo.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ListFilesComponent } from './components/list-files/list-files.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     TodoComponent,
     TodoScreenComponent,
     ListTodoComponent,
-    FormTodoComponent
+    FormTodoComponent,
+    ListFilesComponent
   ],
   imports: [
     CommonModule,

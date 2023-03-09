@@ -17,7 +17,7 @@
     </div>
     <div class="offcanvas-body">
 
-        <form class="formulario" [formGroup]="form" *ngIf="form">
+        <form class="formulario mb-2" [formGroup]="form" *ngIf="form">
             <div class="form-group">
                 <label for="exampleInputEmail1" class="form-label mt-4">Titulo</label>
                 <input type="text" class="form-control form-control-sm" aria-describedby="emailHelp"
@@ -44,5 +44,10 @@
             </div>
         </form>
 
+
+        <div *ngIf="task">
+            <app-list-files #listFiles [taskId]="task.taskId"></app-list-files>
+        </div>
     </div>
+
 </div>

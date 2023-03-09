@@ -32,7 +32,6 @@ export class TodoComponent implements OnInit {
     this.todoService.find(this.sessionService.getId(), page)
     .subscribe({
       next: (data:any)=>{
-        console.log(data);
         this.dataPage = data;
         this.todo = data.content;
       },

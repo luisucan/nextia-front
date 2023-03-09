@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SessionService } from 'src/app/shared/services/session.service';
 import Swal from 'sweetalert2';
 import { TodoService } from '../../services/todo.service';
+import { ListFilesComponent } from '../list-files/list-files.component';
 
 declare var window: any;
 
@@ -17,6 +18,9 @@ export class FormTodoComponent implements OnInit {
 
   @ViewChild('modalWindow',{static: true})
   modalWindow!: ElementRef;
+
+  @ViewChild('listFiles',{static:true})
+  listFiles!: ListFilesComponent;
 
   modal: any;
 
@@ -41,19 +45,27 @@ export class FormTodoComponent implements OnInit {
     })
   }
 
-  openModal(task:any = null){
+  async openModal(task:any = null){
     this.task = null;
+
+    await this.delay(100);
 
     this.buildForm();
     if(task) {
       this.task = task;
       this.form.patchValue(task);
+      if(this.listFiles) this.listFiles.find();
     }
     this.modalWindow.nativeElement.classList.add('show');
   }
 
   close(){
+    this.task = null;
     this.modalWindow.nativeElement.classList.remove('show');
+  }
+
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
   }
 
   ngOnInit(): void {
@@ -85,7 +97,8 @@ export class FormTodoComponent implements OnInit {
       next:(data)=>{
         this.isLoading = false;
         this.onUpdate.emit();
-        this.buildForm();
+        this.task = data;
+        this.form.patchValue(this.task);
       },
       error:(err)=>{
         this.isLoading = false;

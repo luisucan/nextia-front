@@ -1,0 +1,29 @@
+<form class="mb-3">
+    <div class="form-group mb-3">
+        <label for="formFile" class="form-label mt-4">Adjuntar archivos</label>
+        <input #files class="form-control" type="file" multiple>
+    </div>
+    <custom-buttom
+        (onEvent)="save()"
+        [isLoading]="isLoading"
+        [title]="'Subir'"
+        [className]="'btn btn-lg btn-sm btn-primary'"></custom-buttom>
+</form>
+<ul class="list-group">
+    <li
+        *ngFor="let filetask of filesTask"
+        class="list-group-item d-flex justify-content-between align-items-center">
+        {{filetask.originalName}}
+        <div>
+            <a (click)="download(filetask)">
+                <i class="material-icons cursor">download</i>
+            </a>
+            <a (click)="deleteFile(filetask)">
+                <i class="material-icons cursor">delete</i>
+            </a>
+        </div>
+    </li>
+</ul>
+<div *ngIf="filesTask.length === 0">
+    No se encontrarón archivos
+</div>

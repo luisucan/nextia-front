@@ -29,7 +29,7 @@ export class ListTodoComponent implements OnInit {
     console.log(task)
     const result = await Swal.fire({
       title: '¿Esta seguro de eliminar esta tarea?',
-      text: "esta acción no se puede repetir",
+      text: "esta acción no se puede revertir",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
