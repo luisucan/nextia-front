@@ -1,0 +1,48 @@
+<div class="d-grid gap-2">
+    <!--button (click)="buildForm()" class="btn btn-lg btn-sm btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
+        aria-controls="offcanvasExample">
+        Nueva Tarea
+    </button-->
+    <button (click)="openModal()" class="btn btn-lg btn-sm btn-success" type="button" >
+        Nueva Tarea
+    </button>
+</div>
+
+<div class="offcanvas offcanvas-end" #modalWindow tabindex="-1" id="offcanvasExample"
+    aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasExampleLabel">{{task ? 'Editar tarea' : 'Nueva tarea'}}</h5>
+        <button (click)="close()" type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+            aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+
+        <form class="formulario" [formGroup]="form" *ngIf="form">
+            <div class="form-group">
+                <label for="exampleInputEmail1" class="form-label mt-4">Titulo</label>
+                <input type="text" class="form-control form-control-sm" aria-describedby="emailHelp"
+                    placeholder="Ingrese titulo de la tarea" formControlName="title">
+                <small *ngIf="getError('title')" class="form-text red">El titulo es requerido.</small>
+            </div>
+            <div class="form-group mb-3">
+                <label for="exampleInputPassword1" class="form-label mt-4">Descripción</label>
+                <textarea class="form-control" formControlName="description" rows="3"></textarea>
+            </div>
+            <div class="d-grid gap-2">
+                <custom-buttom
+                    *ngIf="!task"
+                    (onEvent)="save()"
+                    [isLoading]="isLoading"
+                    [title]="'Guardar'"
+                    [className]="'btn btn-lg btn-sm btn-primary'"></custom-buttom>
+                <custom-buttom
+                    *ngIf="task"
+                    (onEvent)="edit()"
+                    [isLoading]="isLoading"
+                    [title]="'Editar'"
+                    [className]="'btn btn-lg btn-sm btn-primary'"></custom-buttom>
+            </div>
+        </form>
+
+    </div>
+</div>

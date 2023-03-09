@@ -1,0 +1,7 @@
+<div *ngIf="page">
+    <ul class="pagination pagination-sm">
+        <li class="page-item" *ngFor="let p of pages">
+            <a class="page-link" (click)="onSelectPage(p.position)">{{p.page}}</a>
+        </li>
+    </ul>
+</div>

@@ -46,6 +46,7 @@ export class FormLoginComponent implements OnInit {
         this.isLoading = false;
         console.log(data.Bearer)
         this.sessionService.setToken( data.Bearer);
+        this.sessionService.setId( data.userId );
         this.router.navigateByUrl('');
       },
       error: (err)=>{
